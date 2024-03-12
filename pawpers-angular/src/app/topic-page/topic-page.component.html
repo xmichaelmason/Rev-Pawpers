@@ -1,0 +1,32 @@
+<div class="container">
+    <div class=" bg-secondary d-flex align-items-center justify-content-between p-3 my-3 text-white bg-purple rounded shadow-sm">
+        <div class="d-flex">
+            <img class="me-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Chat-bubble_%28CoreUI_Icons_v1.0.0%29.svg/240px-Chat-bubble_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="" width="48" height="38">
+            <div class="lh-1">
+                <h1 class="h6 mb-0 text-white lh-1">Welcome to the Community</h1>
+                <small>Join In!</small>
+            </div>
+        </div>
+        <button class="ms-4 btn btn-dark align-self-end" *ngIf="profile.profileName; else CreateProfile" (click)="addTopic()">Add Topic</button>
+        <ng-template #CreateProfile>
+            <button class="ms-4 btn btn-dark align-self-end" [routerLink]="['../profile-page']">Create Profile</button>
+        </ng-template>
+    </div>
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">All Topics</h6>
+        <div *ngFor="let topic of topics.$values">
+            <div class="d-flex text-muted pt-3">
+                <img class="flex-shrink-0 me-2 rounded" height="32" width="32" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Echo_edit-user-talk_icon.svg/240px-Echo_edit-user-talk_icon.svg.png" alt="chat head icon">
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">{{topic.profile.profileName}}</strong>
+                    <a routerLink="/reply-page/{{topic.topicId}}">{{topic.topicName}}</a>
+                </p>
+            </div>
+            <small class="d-block text-end mt-3">
+            {{topic.postTimestamp | date}}
+          </small>
+        </div>
+    </div>
+</div>

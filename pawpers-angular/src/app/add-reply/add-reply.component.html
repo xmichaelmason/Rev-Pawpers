@@ -1,0 +1,15 @@
+<br>
+<br>
+
+<form [formGroup]="replyGroup">
+    <textarea formControlName="replyMessage" style="overflow:auto;resize:none" rows="7" cols="75" placeholder="Enter text here...">
+    </textarea>
+    <p>250 character limit</p>
+    <div *ngIf="message?.touched">
+        <div class="text-danger" *ngIf="message?.errors?.['required']">This field is required</div>
+    </div>  
+    <!-- <input type="submit" value="Submit"> -->
+    <br>
+    <button class="btn btn-primary" (click)="createReply(replyGroup)">Submit</button>
+</form>
+<h4 class="error">{{displayMessage}}</h4>

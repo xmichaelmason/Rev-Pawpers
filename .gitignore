@@ -1,0 +1,55 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+pawpers-angular/dist
+pawpers-angular/tmp
+pawpers-angular/out-tsc
+# Only exists if Bazel was run
+pawpers-angular/bazel-out
+
+# dependencies
+pawpers-angular/node_modules
+
+# profiling files
+pawpers-angular/chrome-profiler-events*.json
+
+# IDEs and editors
+pawpers-angular/.idea
+pawpers-angular/.project
+pawpers-angular/.classpath
+pawpers-angular/.c9/
+pawpers-angular/*.launch
+pawpers-angular/.settings/
+pawpers-angular/*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+pawpers-angular/.angular/cache
+pawpers-angular/.sass-cache
+pawpers-angular/connect.lock
+pawpers-angular/coverage
+pawpers-angular/libpeerconnection.log
+pawpers-angular/npm-debug.log
+pawpers-angular/yarn-error.log
+pawpers-angular/testem.log
+pawpers-angular/typings
+
+# System Files
+pawpers-angular/.DS_Store
+pawpers-angular/Thumbs.db
+
+.vscode
+.vs
+bin
+obj
+appsettings.json
+Logs
+
+sendgrid.env

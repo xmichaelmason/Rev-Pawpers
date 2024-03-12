@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="p-4" *ngIf="!profileExists" id="create-profile">
+        <app-add-profile></app-add-profile>
+    </div>
+
+    <div class="" *ngIf="profileExists" id="favorites">
+        <app-favorites-page [profileId]="profileId"></app-favorites-page>
+    </div>
+
+    <div class="mt-4 p-4 card card-responsive bg-dark" *ngIf="profileExists" id="profile">
+        <div class="d-flex mt-4 mb-4 justify-content-right" id="">
+            <a onClick="window.print()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Farm-Fresh_printer.png" alt="print this page">
+            </a>
+            <div>
+                <app-profile-email [profile]="profile" [hasChildren]="hasChildren" [hasYard]="hasYard" [dwellingType]="dwellingType" [familyAllergies]="familyAllergies"></app-profile-email>
+            </div>
+        </div>
+        <dl class="row">
+            <dt class="col-md-2">Name</dt>
+            <dd class="col-md-9">{{profile.profileName}}</dd>
+            <dt class="col-md-2">Address</dt>
+            <dd class="col-md-9">{{profile.profileStreetaddress}}<br /> {{profile.profileCity}}, {{state}} {{profile.profileZipcode}}
+            </dd>
+            <dt class="col-md-2">Age</dt>
+            <dd class="col-md-9">{{profile.profileAge}}</dd>
+            <dt class="col-md-2">Home Phone</dt>
+            <dd class="col-md-9">{{profile.profileHomephone}}</dd>
+            <dt class="col-md-2">Personal Phone</dt>
+            <dd class="col-md-9">{{profile.profilePersonalphone}}</dd>
+            <dt class="col-md-2">Email</dt>
+            <dd class="col-md-9">{{profile.profileEmail}}</dd>
+            <dt class="col-md-2">Occupation</dt>
+            <dd class="col-md-9">{{profile.profileOccupation}}</dd>
+            <dt class="col-md-2">Spouse</dt>
+            <dd class="col-md-9">{{profile.profileSpousename}}</dd>
+            <dt class="col-md-2">Children</dt>
+            <dd class="col-md-9">{{hasChildren}}</dd>
+            <dt class="col-md-2">Dwelling Type</dt>
+            <dd class="col-md-9">{{dwellingType}}</dd>
+            <dt class="col-md-2">Yard</dt>
+            <dd class="col-md-9">{{hasYard}}</dd>
+            <dt class="col-md-2" *ngIf="profile.profileLandlordname != null">Landlord Name</dt>
+            <dd class="col-md-9" *ngIf="profile.profileLandlordname != null">{{profile.profileLandlordname}}</dd>
+            <dt class="col-md-2" *ngIf="profile.profileLandlordphone != null">Landlord Phone</dt>
+            <dd class="col-md-9" *ngIf="profile.profileLandlordphone != null">{{profile.profileLandlordphone}}</dd>
+            <dt class="col-md-2" *ngIf="profile.profileOtherpetname != null">Other Pet Name</dt>
+            <dd class="col-md-9" *ngIf="profile.profileOtherpetname != null">{{profile.profileOtherpetname}}</dd>
+            <dt class="col-md-2" *ngIf="profile.profileOtherpetbreed != null">Other pet breed</dt>
+            <dd class="col-md-9" *ngIf="profile.profileOtherpetbreed != null">{{profile.profileOtherpetbreed}}</dd>
+            <dt class="col-md-2" *ngIf="profile.profileOtherpetsex != null">Other Pet Gender</dt>
+            <dd class="col-md-9" *ngIf="profile.profileOtherpetsex != null">{{profile.profileOtherpetsex}}</dd>
+            <dt class="col-md-2">Known Family Animal Allergies</dt>
+            <dd class="col-md-9">{{familyAllergies}}</dd>
+            <dt class="col-md-2">Primary Caregiver</dt>
+            <dd class="col-md-9">{{profile.profileResponsiblefordog}}</dd>
+            <dt class="col-md-2">Adoption Reason</dt>
+            <dd class="col-md-9">{{profile.profileAdoptionreason}}</dd>
+            <dt class="col-md-4">Where Will The Dog Sleep</dt>
+            <dd class="col-md-7">{{profile.profileDogsleepat}}</dd>
+            <dt class="col-md-6">What will you do if the dog is aggressive towards humans or other animals</dt>
+            <dd class="col-md-4">{{profile.profileDogaggresive}}</dd>
+            <dt class="col-md-6">What will you do if the dog gets sick and needs medication?</dt>
+            <dd class="col-md-4">{{profile.profileMedfordog}}</dd>
+            <dt class="col-md-6">What will you do if you are unable to care for the dog?</dt>
+            <dd class="col-md-4">{{profile.profileNocaredog}}</dd>
+        </dl>
+    </div>
+
+    <div class="album p-2 mt-4 bg-light" *ngIf="recommended.length">
+        <div class="container">
+            <h3 class="text-dark">Recommended Dogs Based on Your Profile</h3>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-6">
+                <div class="col" *ngFor="let rec of recommended">
+                    <div class="card shadow-sm bg-secondary">
+                        <img *ngIf="rec.photos[0]; else altImg" src={{rec.photos[0].medium}} alt="doggo photo">
+                        <ng-template #altImg>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Missing_dog_photo.png" alt="missing image">
+                        </ng-template>
+
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{rec.name}}<br>
+                                <small>
+                                    {{rec.breeds.primary}}, {{rec.age}}<br>
+                                    {{rec.contact.address.city}}, {{rec.contact.address.postcode}}
+                                </small>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-dark" [routerLink]="['../dogview-page/' + rec.id]">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

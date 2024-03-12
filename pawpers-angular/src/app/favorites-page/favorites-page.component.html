@@ -1,0 +1,26 @@
+<div class="album p-2 mt-4 bg-light">
+    <div class="container">
+        <h3 class="text-dark">Your Favorites</h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-6">
+            <div class="col" *ngFor="let favorite of favorites">
+                <div class="card shadow-sm bg-secondary">
+                    <img *ngIf="favorite.photos[0]; else altImg" src={{favorite.photos[0].medium}} alt="doggo photo">
+                    <ng-template #altImg>
+                        <img height="100px" width="100px" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Missing_dog_photo.png" alt="missing image">
+                    </ng-template>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{favorite.name}}<br>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-dark" [routerLink]="['../dogview-page/' + favorite.id]">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+.text{
+    text-align:center;
+    padding: 70px 0;
+}
+
+.responsive{
+    width: 100%;
+    height: auto;
+}
+
+.background {
+    width: 100%;
+    height: 100vh;
+    background: url('../../assets/images/doggo.jpeg') no-repeat;
+    background-size: cover;
+    text-align: center;
+ }
+
+.center {
+    background-image:url(https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.indent{
+    padding-top: 50px;
+    padding-left: 80px;
+}
+
+.box{
+    background-image:url(https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    padding: 150px;
+    margin: 150px;
+}

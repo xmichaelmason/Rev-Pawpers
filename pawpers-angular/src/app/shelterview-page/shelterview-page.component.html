@@ -1,0 +1,46 @@
+<section class="py-5 text-center container">
+    <div class="row py-lg-4">
+        <div class="card bg-secondary">
+            <h2>{{organization.name}}</h2>
+            <p *ngIf="organization.address.city">{{organization.address.city}}, {{organization.address.postcode}}</p>
+            <div>
+                {{organization.phone}}<br *ngIf="organization.phone" /> {{organization.email}}
+                <br *ngIf="organization.email" /> {{organization.website}}
+                <br *ngIf="organization.website" />
+                <a *ngIf="organization.social_media.facebook" href={{organization.social_media.facebook}}>
+                    <img height="25px" width="25px" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Facebook-new.png" alt="facebook icon">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="album p-2 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-5">
+            <div class="col" *ngFor="let animal of searchResults.animals">
+                <div class="card shadow-sm bg-secondary">
+                    <img *ngIf="animal.photos[0]; else altImg" src={{animal.photos[0].small}} alt="doggo photo">
+                    <ng-template #altImg>
+                        <img height="100px" width="100px" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Missing_dog_photo.png" alt="missing image">
+                    </ng-template>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{animal.name}}<br>
+                            <small>
+                                {{animal.breeds.primary}}, {{animal.age}}<br>
+                                {{animal.contact.address.city}}, {{animal.contact.address.postcode}}
+                            </small>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-light" [routerLink]="['../../dogview-page/' + animal.id]">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

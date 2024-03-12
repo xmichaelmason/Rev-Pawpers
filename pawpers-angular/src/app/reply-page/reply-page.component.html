@@ -1,0 +1,32 @@
+<div class="container">
+    <div
+        class=" bg-secondary d-flex align-items-center justify-content-between p-3 my-3 text-white bg-purple rounded shadow-sm">
+        <div class="">
+            <h2>{{topic.topicName}}</h2>
+            <p>{{topic.profile.profileName}}</p>
+            <small>{{topic.postTimestamp | date}}</small>
+            <p>{{topic.topicBody}}</p>
+        </div>
+        <button *ngIf="auth0.isAuthenticated$ | async" (click)="showOnClick()" class="btn btn-primary">Add
+            Reply</button>
+        <app-add-reply *ngIf="show"></app-add-reply>
+    </div>
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">All Topics</h6>
+        <div *ngFor="let reply of topic.replies.$values">
+            <div class="d-flex text-muted pt-3">
+                <img class="flex-shrink-0 me-2 rounded" height="32" width="32"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Echo_edit-user-talk_icon.svg/240px-Echo_edit-user-talk_icon.svg.png"
+                    alt="chat head icon">
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">{{reply.profile.profileName}}</strong> {{reply.replyMessage}}
+                </p>
+            </div>
+            <small class="d-block text-end mt-3">
+                {{reply.replyTimestamp | date}}
+            </small>
+        </div>
+    </div>
+</div>

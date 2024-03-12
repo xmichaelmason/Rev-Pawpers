@@ -1,0 +1,36 @@
+<section class="py-5 text-center container">
+    <div class="row py-lg-4">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <form #zipSearch="ngForm" (ngSubmit)="onClickSubmit(zipSearch.value)">
+                <div class="input-group mb-2">
+                    <input class="form-control" type="text" name="zipCode" placeholder="zip code" ngModel>
+                    <button type="submit" class="btn btn-outline-secondary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div class="container py-4">
+    <div class="row mb-2">
+        <div class="col-md-6" *ngFor="let org of searchResults">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative text-white bg-secondary">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">{{org.name}}</h3>
+                    <div class="mb-1 text-muted">{{org.email}}</div>
+                    <p class="card-text mb-auto">{{org.address.city}}<span *ngIf="org.distance">, {{org.distance}} mi. away</span></p>
+                    <a *ngIf="org.social_media.facebook" href={{org.social_media.facebook}}>
+                        <img height="25px" width="25px" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Facebook-new.png" alt="facebook icon">
+                    </a>
+                    <br>
+                    <button class="btn btn-sm btn-dark" [routerLink]="['../shelterview-page/' + org.id]">View</button>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img width="200" height="250" src={{org.photos[0].medium}} *ngIf="org.photos[0]; else missingPhoto">
+                    <ng-template #missingPhoto>
+                        <img width="200" height="250" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Missing_dog_photo.png" alt="missing image">
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container mt-4 p-4">
+    <div class="row p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">{{searchResult.animal.name}}</h1>
+            <ul class="list-group">
+                <li class="list-group-item" *ngIf="searchResult.animal.contact.address">
+                    {{searchResult.animal.contact.address.address1}} {{searchResult.animal.contact.address.address2}} <br /> {{searchResult.animal.contact.address.city}}, {{searchResult.animal.contact.address.state}} {{searchResult.animal.contact.address.postcode}}
+                </li>
+                <li class="list-group-item" *ngIf="searchResult.animal.contact.email">{{searchResult.animal.contact.email}}</li>
+                <li class="list-group-item" *ngIf="searchResult.animal.contact.phone">{{searchResult.animal.contact.phone}}</li>
+                <li class="list-group-item" *ngIf="searchResult.animal._links.organization">
+                    <a href={{searchResult.animal.url}}>{{searchResult.animal.url}}</a>
+                </li>
+            </ul>
+            <app-addfavorite-button [dogId]="searchResult.animal.id"></app-addfavorite-button>
+        </div>
+        <figure class="mb-4 col-md-6">
+            <img class="img-fluid rounded" *ngIf="searchResult.animal.photos[0].large; else imgAlt" src={{searchResult.animal.photos[0].large}} alt="large doggo photo">
+            <ng-template #imgAlt>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Missing_dog_photo.png" alt="image not provided">
+            </ng-template>
+        </figure>
+    </div>
+    <div class="row mb-2" *ngIf="searchResult.animal.environment != null">
+        <div class="col-md-6">
+            <div class="bg-secondary row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <h4 class="p-2">Ideal Environment</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngIf="searchResult.animal.environment.children">Child Friendly</li>
+                    <li class="list-group-item" *ngIf="searchResult.animal.environment.cats">Cat Friendly</li>
+                    <li class="list-group-item" *ngIf="searchResult.animal.environment.dogs">Dog Friendly</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="searchResult.animal.attributes != null">
+            <div class="bg-secondary row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <h4 class="p-2">Attributes</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngIf="searchResult.animal.attributes.house_trained">House Trained</li>
+                    <li class="list-group-item" *ngIf="searchResult.animal.attributes.shots_current">Shots Current</li>
+                    <li class="list-group-item" *ngIf="searchResult.animal.attributes.spayed_neutered">Nuetered/Spayed</li>
+                    <li class="list-group-item" *ngIf="searchResult.animal.attributes.special_needs">Special Needs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="searchResult.animal.tags != null">
+            <div class="bg-secondary row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <dl class="p-2">
+                    <dt class="col-sm-2">Age</dt>
+                    <dd class="col-sm-9" *ngIf="searchResult.animal.age; else ageAlt">{{searchResult.animal.age}}</dd>
+                    <ng-template #ageAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+
+                    <dt class="col-sm-2">Gender</dt>
+                    <dd class="col-sm-9" *ngIf="searchResult.animal.gender; else genderAlt">{{searchResult.animal.gender}}</dd>
+                    <ng-template #genderAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+
+                    <dt class="col-sm-2">Breeds</dt>
+                    <dd class="col-sm-9" *ngIf="searchResult.animal.breeds.primary; else breedAlt">{{searchResult.animal.breeds.primary}} {{searchResult.animal.breeds.secondary}}</dd>
+                    <ng-template #breedAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+
+                    <dt class="col-sm-2">Colors</dt>
+                    <dd class="col-sm-9" *ngIf="searchResult.animal.colors.primary; else colorAlt">{{searchResult.animal.colors.primary}} {{searchResult.animal.colors.secondary}}</dd>
+                    <ng-template #colorAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+
+                    <dt class="col-sm-2">Coat</dt>
+                    <dd class="col-sm-9" *ngIf="searchResult.animal.coat; else coatAlt">{{searchResult.animal.coat}}</dd>
+                    <ng-template #coatAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+
+                    <dt class="col-sm-2">Size</dt>
+                    <dd class="col-sm-9" *ngIf="searchResult.animal.size; else sizeAlt">{{searchResult.animal.size}}</dd>
+                    <ng-template #sizeAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+
+                    <dt class="col-sm-4">Description</dt>
+                    <dd class="col-sm-7" *ngIf="searchResult.animal.description; else descriptionAlt">{{searchResult.animal.description}}</dd>
+                    <ng-template #descriptionAlt>
+                        <dd class="col-sm-9">Not provided</dd>
+                    </ng-template>
+                </dl>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="searchResult.animal.tags != null">
+            <div class="bg-secondary row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <h4 class="p-2">Tags</h4>
+                <ul class="list-group" *ngFor="let tag of searchResult.animal.tags">
+                    <li class="list-group-item">{{tag}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

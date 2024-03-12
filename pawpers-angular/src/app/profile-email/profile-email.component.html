@@ -1,0 +1,30 @@
+<form *ngIf="show" class="contact-form" (submit)="sendEmail($event)">
+    <input type="hidden" name={{profile.profileName}}>
+    <input type="hidden" name={{profile.profileEmail}}>
+    <input type="hidden" name="message" value="
+    Name: {{profile.profileName}}<br>
+    Address: {{profile.profileStreetaddress}}, {{profile.profileCity}}, {{profile.state}}, {{profile.profileZipcode}}<br>
+    Age: {{profile.profileAge}}<br>
+    Home Phone: {{profile.profileHomephone}}<br>
+    Personal Phone: {{profile.profilePersonalphone}}<br>
+    Email: {{profile.profileEmail}}<br>
+    Occupation: {{profile.profileOccupation}}<br>
+    Spouse: {{profile.profileSpousename}}<br>
+    Children: {{hasChildren}}<br>
+    Dwelling Type: {{dwellingType}}<br>
+    Yard: {{hasYard}}<br>
+    Landlord Name: {{profile.profileLandlordname}}<br>
+    Landlord Phone: {{profile.profileLandlordphone}}<br>
+    Other Pet Name: {{profile.profileOtherpetname}}<br>
+    Other pet breed: {{profile.profileOtherpetbreed}}<br>
+    Other Pet Gender: {{profile.profileOtherpetsex}}<br>
+    Known Family Animal Allergies: {{familyAllergies}}<br>
+    Primary Caregiver: {{profile.profileResponsiblefordog}}<br>
+    Adoption Reason: {{profile.profileAdoptionreason}}<br>
+    Where Will The Dog Sleep: {{profile.profileDogsleepat}}<br>
+    What will you do if the dog is aggressive towards humans or other animals: {{profile.profileDogaggresive}}<br>
+    What will you do if the dog gets sick and needs medication?: {{profile.profileMedfordog}}<br>
+    What will you do if you are unable to care for the dog?: {{profile.profileNocaredog}}<br>
+">
+    <button class="btn btn-link" value="Send"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Farm-Fresh_email.png" alt="email profile"></button>
+</form>

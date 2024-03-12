@@ -1,0 +1,7 @@
+<div class="container">
+    <button class="btn btn-outline-secondary" type="submit" *ngIf="show; else favorite" (click)="addDogToFavorite()">Favorite</button>
+    <br>
+    <ng-template #favorite>
+        <img height="64px" width="64px" src="https://upload.wikimedia.org/wikipedia/commons/6/68/Crystal_Clear_filesystem_folder_favorites.png" alt="favorite">
+    </ng-template>
+</div>

@@ -1,0 +1,60 @@
+<section class="py-5 text-center container">
+    <div class="row py-lg-4">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <form #zipSearch="ngForm" (ngSubmit)="onClickSubmit(zipSearch.value)">
+                <div class="input-group mb-2">
+                    <input required type="text" class="form-control" name="zipCode" placeholder="Search by Zip Code" ngModel aria-label="Zip Code Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-outline-secondary">Search</button>
+                    </div>
+                </div>
+            </form>
+            <p class="error">{{displayMessage2}}</p>
+
+
+
+            <form #breedSearch="ngForm" (ngSubmit)="breedSearchOnClick(breedSearch.value)">
+                <div class="input-group mb-2">
+                    <input required type="text" class="form-control" name="breedSearch" placeholder="Search By Breed" ngModel aria-label="Breed Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-outline-secondary">Search</button>
+                    </div>
+                </div>
+            </form>
+            <p class="error">{{displayMessage1}}</p>
+        </div>
+    </div>
+</section>
+
+<div class="album p-2 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 row-cols-lg-5 g-5" *ngIf="searchResults.animals.length > 0; else notFound">
+            <div class="col" *ngFor="let animal of searchResults.animals">
+                <div class="card shadow-sm bg-secondary">
+                    <img *ngIf="animal.photos[0]; else altImg" height="100%" width="100%" src={{animal.photos[0].small}} alt="doggo photo">
+                    <ng-template #altImg>
+                        <img height="100%" width="100%" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Missing_dog_photo.png" alt="missing image">
+                    </ng-template>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{animal.name}}<br>
+                            <small>
+                                {{animal.breeds.primary}}, {{animal.age}}<br>
+                                {{animal.contact.address.city}}, {{animal.contact.address.postcode}}
+                            </small>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-light" [routerLink]="['../dogview-page/' + animal.id]">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #notFound>
+            <p>Not found</p>
+        </ng-template>
+    </div>
+</div>
